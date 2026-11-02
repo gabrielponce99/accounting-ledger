@@ -1,9 +1,11 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AccountingApp {
         static Scanner scanner = new Scanner(System.in);
+        static ArrayList<Transaction> transactions = new ArrayList<>();
     public static void main(String[] args) {
         runHomeScreen();
     }
@@ -22,7 +24,7 @@ public class AccountingApp {
             command = scanner.nextLine().trim().toUpperCase();
 
             switch (command) {
-                case "D" -> System.out.println(" ");
+                case "D" -> addDeposit();
                 case "P" -> System.out.println(" ");
                 case "L" -> runScreenLedger();
                 case "X" -> System.out.println("Goodbye!");
@@ -82,4 +84,16 @@ public class AccountingApp {
             }
         } while (!command.equals("0"));
     }
+
+    public static void addDeposit() {
+        System.out.println("All the deposits");
+        pressEnterToContinue();
+    }
+
+    public static void pressEnterToContinue() {
+        System.out.println();
+        System.out.println("Press enter to continue back to the menu...");
+        scanner.nextLine();
+    }
+
 }
