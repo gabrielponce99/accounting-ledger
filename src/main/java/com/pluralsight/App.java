@@ -9,10 +9,11 @@ import java.util.Scanner;
 
 public class App {
     static Scanner scanner = new Scanner(System.in);
-    static ArrayList<Transaction> statements = new ArrayList<>();
+    static ArrayList<Transaction> transactions = new ArrayList<>();
 
 
     public static void main(String[] args) {
+        loadTransactions();
         runHomeScreen();
     }
 
@@ -49,8 +50,8 @@ public class App {
 
     // toString to print File
     public static void printTransactions(ArrayList<Transaction> transactions) {
-        for (Transaction entry : transactions) {
-            System.out.println(entry);
+        for (Transaction transaction : transactions) {
+            System.out.println(transaction);
         }
 
         pressEnterToContinue();
