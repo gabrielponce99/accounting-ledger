@@ -123,7 +123,7 @@ public class App {
                 case "2" -> displayPreviousMonth(loadTransactions());
                 case "3" -> displayYearToDate(loadTransactions());
                 case "4" -> displayPreviousYear(loadTransactions());
-                case "5" -> searchVendor(transactions);
+                case "5" -> searchVendor(loadTransactions());
                 case "0" -> System.out.println("Back to Ledger");
                 default -> System.out.println("That isn't a command. Try again.");
             }
@@ -206,6 +206,7 @@ public class App {
         pressEnterToContinue();
     }
 
+    // Action to display Month to Date
     public static void displayMonthToDate(ArrayList<Transaction> transactions) {
         LocalDate today = LocalDate.now();
 
@@ -218,6 +219,7 @@ public class App {
         pressEnterToContinue();
     }
 
+    // Action to display Previous Month
     public static void displayPreviousMonth(ArrayList<Transaction> transactions) {
         LocalDate lastMonth = LocalDate.now().minusMonths(1);
 
@@ -230,6 +232,7 @@ public class App {
         pressEnterToContinue();
     }
 
+    // Action to display Year to Date
     public static void displayYearToDate(ArrayList<Transaction> transactions) {
         LocalDate year = LocalDate.now();
 
@@ -242,6 +245,7 @@ public class App {
         pressEnterToContinue();
     }
 
+    // Action to display Previous Year
     public static void displayPreviousYear(ArrayList<Transaction> transactions) {
         LocalDate lastYear = LocalDate.now().minusYears(1);
 
@@ -254,8 +258,23 @@ public class App {
         pressEnterToContinue();
     }
 
+    // Action to search Vendor
     public static void searchVendor(ArrayList<Transaction> transactions) {
-        System.out.println("TODO");
+        boolean found = false;
+
+        while (!found) {
+            String vendor = promptForString("Enter the desired vendor: ");
+            for (Transaction transaction : transactions) {
+                if (transaction != null && transaction.getVendor().equalsIgnoreCase(vendor)) {
+                    System.out.println(transaction);
+                    found = true;
+                }
+            }
+            if (!found) {
+                System.out.println("I don't know that vendor, try again");
+            }
+        }
+        pressEnterToContinue();
     }
 
     // Input helper (double)
