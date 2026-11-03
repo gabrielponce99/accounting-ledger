@@ -11,7 +11,6 @@ public class App {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Transaction> transactions = new ArrayList<>();
 
-
     public static void main(String[] args) {
         loadTransactions();
         runHomeScreen();
@@ -53,7 +52,6 @@ public class App {
         for (Transaction transaction : transactions) {
             System.out.println(transaction);
         }
-
         pressEnterToContinue();
     }
 
@@ -96,8 +94,8 @@ public class App {
 
             switch (command) {
                 case "A" -> printTransactions(loadTransactions());
-                case "D" -> System.out.println(" ");
-                case "P" -> System.out.println(" ");
+                case "D" -> displayDeposits(loadTransactions());
+                case "P" -> displayPayments(loadTransactions());
                 case "R" -> runReportsScreen();
                 case "H" -> System.out.println("Back to Home");
                 default -> System.out.println("That isn't a command. Try again.");
@@ -154,9 +152,8 @@ public class App {
             writer.newLine();
             System.out.println("Deposit saved.");
         } catch (IOException e) {
-            System.out.println("Error writing to file: " + e.getMessage());
+            System.out.println("Error writing to file");
         }
-
         pressEnterToContinue();
     }
 
@@ -184,9 +181,28 @@ public class App {
             writer.newLine();
             System.out.println("Purchased completed.");
         } catch (IOException e) {
-            System.out.println("Error writing to file: " + e.getMessage());
+            System.out.println("Error writing to file.");
         }
+        pressEnterToContinue();
+    }
 
+    // Display only the deposits
+    public static void displayDeposits(ArrayList<Transaction> transactions) {
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() > 0) {
+                System.out.println(transaction);
+            }
+        }
+        pressEnterToContinue();
+    }
+
+    // Display only the payments
+    public static void displayPayments(ArrayList<Transaction> transactions) {
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() < 0) {
+                System.out.println(transaction);
+            }
+        }
         pressEnterToContinue();
     }
 
