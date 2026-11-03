@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
-        static Scanner scanner = new Scanner(System.in);
-        static ArrayList<Transaction> statements = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+    static ArrayList<Transaction> statements = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -18,7 +18,7 @@ public class App {
 
     // File Reader
     public static ArrayList<Transaction> loadTransactions() {
-        ArrayList<Transaction> statements = new ArrayList<>();
+        ArrayList<Transaction> transactions = new ArrayList<>();
 
         try {
             FileReader fileReader = new FileReader("transactions.csv");
@@ -36,21 +36,24 @@ public class App {
                 String vendor = fields[3];
                 double amount = Double.parseDouble(fields[4]);
                 Transaction transaction = new Transaction(date, time, description, vendor, amount);
-                statements.add(transaction);
+                transactions.add(transaction);
 
             }
             bufferedReader.close();
         } catch (IOException e) {
             System.out.println("There was an error reading the product file. Check the location of the file.");
         }
-        return statements;
+        return transactions;
+
     }
 
     // toString to print File
-    public static void printTransactions(ArrayList<Transaction> statements) {
-        for (Transaction statement : statements) {
-            System.out.println(statement);
+    public static void printTransactions(ArrayList<Transaction> transactions) {
+        for (Transaction entry : transactions) {
+            System.out.println(entry);
         }
+
+        pressEnterToContinue();
     }
 
     // Main Home Screen
@@ -145,7 +148,7 @@ public class App {
 
         String line = date + "|" + time + "|" + description + "|" + vendor + "|" + amount;
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
             writer.write(line);
             writer.newLine();
             System.out.println("Deposit saved.");
@@ -175,7 +178,7 @@ public class App {
 
         String line = date + "|" + time + "|" + description + "|" + vendor + "|" + amount;
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
             writer.write(line);
             writer.newLine();
             System.out.println("Purchased completed.");
