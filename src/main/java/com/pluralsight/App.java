@@ -41,7 +41,7 @@ public class App {
             }
             bufferedReader.close();
         } catch (IOException e) {
-            System.out.println("There was an error reading the product file. Check the location of the file.");
+            System.out.println("There was an error reading the transactions. Check the location of the file.");
         }
         return transactions;
 
@@ -119,11 +119,11 @@ public class App {
             command = scanner.nextLine().trim().toUpperCase();
 
             switch (command) {
-                case "1" -> System.out.println(" ");
-                case "2" -> System.out.println(" ");
-                case "3" -> System.out.println(" ");
-                case "4" -> System.out.println(" ");
-                case "5" -> System.out.println(" ");
+                case "1" -> displayMonthToDate(loadTransactions());
+                case "2" -> displayPreviousMonth(loadTransactions());
+                case "3" -> displayYearToDate(transactions);
+                case "4" -> displayPreviousYear(transactions);
+                case "5" -> searchVendor(transactions);
                 case "0" -> System.out.println("Back to Ledger");
                 default -> System.out.println("That isn't a command. Try again.");
             }
@@ -179,7 +179,7 @@ public class App {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
             writer.write(line);
             writer.newLine();
-            System.out.println("Purchased completed.");
+            System.out.println("Purchased saved.");
         } catch (IOException e) {
             System.out.println("Error writing to file.");
         }
@@ -206,10 +206,46 @@ public class App {
         pressEnterToContinue();
     }
 
+    public static void displayMonthToDate(ArrayList<Transaction> transactions) {
+        LocalDate today = LocalDate.now();
+
+        for (Transaction transaction : transactions) {
+            LocalDate time = transaction.getDate();
+            if (time.getMonth() == today.getMonth() && time.getYear() == today.getYear()) {
+                System.out.println(transaction);
+            }
+        }
+        pressEnterToContinue();
+    }
+
+    public static void displayPreviousMonth(ArrayList<Transaction> transactions) {
+        LocalDate lastMonth = LocalDate.now().minusMonths(1);
+
+        for (Transaction transaction : transactions) {
+            LocalDate time = transaction.getDate();
+            if (time.getMonth() == lastMonth.getMonth() && time.getYear() == lastMonth.getYear()) {
+                System.out.println(transaction);
+            }
+        }
+        pressEnterToContinue();
+    }
+
+    public static void displayYearToDate(ArrayList<Transaction> transactions) {
+        System.out.println("TODO");
+    }
+
+    public static void displayPreviousYear(ArrayList<Transaction> transactions) {
+        System.out.println("TODO");
+    }
+
+    public static void searchVendor(ArrayList<Transaction> transactions) {
+        System.out.println("TODO");
+    }
+
     // Input helper (double)
     private static double promptForDouble(String prompt) {
         while (true) {
-            System.out.print(prompt);
+            System.out.println(prompt);
             try {
                 return Double.parseDouble(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
