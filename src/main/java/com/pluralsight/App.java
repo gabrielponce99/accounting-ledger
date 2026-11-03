@@ -121,8 +121,8 @@ public class App {
             switch (command) {
                 case "1" -> displayMonthToDate(loadTransactions());
                 case "2" -> displayPreviousMonth(loadTransactions());
-                case "3" -> displayYearToDate(transactions);
-                case "4" -> displayPreviousYear(transactions);
+                case "3" -> displayYearToDate(loadTransactions());
+                case "4" -> displayPreviousYear(loadTransactions());
                 case "5" -> searchVendor(transactions);
                 case "0" -> System.out.println("Back to Ledger");
                 default -> System.out.println("That isn't a command. Try again.");
@@ -231,11 +231,27 @@ public class App {
     }
 
     public static void displayYearToDate(ArrayList<Transaction> transactions) {
-        System.out.println("TODO");
+        LocalDate year = LocalDate.now();
+
+        for (Transaction transaction : transactions) {
+            LocalDate time = transaction.getDate();
+            if (year.getYear() == time.getYear()) {
+                System.out.println(transaction);
+            }
+        }
+        pressEnterToContinue();
     }
 
     public static void displayPreviousYear(ArrayList<Transaction> transactions) {
-        System.out.println("TODO");
+        LocalDate lastYear = LocalDate.now().minusYears(1);
+
+        for (Transaction transaction : transactions) {
+            LocalDate time = transaction.getDate();
+            if (time.getYear() == lastYear.getYear()) {
+                System.out.println(transaction);
+            }
+        }
+        pressEnterToContinue();
     }
 
     public static void searchVendor(ArrayList<Transaction> transactions) {
