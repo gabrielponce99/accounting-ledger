@@ -121,7 +121,7 @@ public class App {
                 case "4" -> displayPreviousYear(transactions);
                 case "5" -> searchByVendor(transactions);
                 case "0" -> System.out.println("Back to Ledger");
-                default -> System.out.println("That isn't a command. Try again.");
+                default -> System.out.println("That is not a command, try again.");
             }
         } while (!command.equals("0"));
     }
@@ -259,18 +259,16 @@ public class App {
     // Action to search Vendor
     public static void searchByVendor(ArrayList<Transaction> transactions) {
         boolean found = false;
+        String vendor = promptForString("Enter the desired vendor: ");
 
-        while (!found) {
-            String vendor = promptForString("Enter the desired vendor: ");
-            for (Transaction transaction : transactions) {
-                if (transaction != null && transaction.getVendor().equalsIgnoreCase(vendor)) {
-                    System.out.println(transaction);
-                    found = true;
-                }
+        for (Transaction transaction : transactions) {
+            if (transaction != null && transaction.getVendor().equalsIgnoreCase(vendor)) {
+                System.out.println(transaction);
+                found = true;
             }
-            if (!found) {
-                System.out.println("I don't know that vendor, try again");
-            }
+        }
+        if (!found) {
+            System.out.println("No transactions found.");
         }
         pressEnterToContinue();
     }
