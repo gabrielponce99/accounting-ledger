@@ -137,20 +137,9 @@ public class App {
             amount = promptForDouble("Amount: ");
         }
 
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String date = LocalDate.now().toString();
-        String time = LocalTime.now().format(timeFormatter);
-
-        String line = date + "|" + time + "|" + description + "|" + vendor + "|" + amount;
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
-            writer.write(line);
-            writer.newLine();
-            transactions.add(new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount));
-            System.out.println("Deposit saved.");
-        } catch (IOException e) {
-            System.out.println("Error writing to file");
-        }
+        Transaction transaction = new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount);
+        saveTransaction(transaction);
+        System.out.println("Deposit saved.");
         pressEnterToContinue();
     }
 
@@ -162,26 +151,31 @@ public class App {
 
         while (amount <= 0) {
             System.out.println("The number must be greater than 0.");
-            amount = promptForDouble("Amount: ");
+            amount = promptForDouble("Enter the amount: ");
         }
 
-        amount = -amount;
+        Transaction transaction = new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, -amount);
+        saveTransaction(transaction);
+        System.out.println("Payment saved.");
+        pressEnterToContinue();
+    }
 
+    public static void saveTransaction(Transaction transaction) {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String date = LocalDate.now().toString();
         String time = LocalTime.now().format(timeFormatter);
 
-        String line = date + "|" + time + "|" + description + "|" + vendor + "|" + amount;
+        String line = date + "|" + time + "|" + transaction.getDescription() + "|" + transaction.getVendor()
+                + "|" + transaction.getAmount() + "\n";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
             writer.write(line);
-            writer.newLine();
-            transactions.add(new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount));
-            System.out.println("Payment saved.");
+            transactions.add(transaction);
+
         } catch (IOException e) {
-            System.out.println("Error writing to file.");
+            System.out.println("Unable to save the transaction " + e.getMessage());
         }
-        pressEnterToContinue();
+
     }
 
     // Display only the deposits
