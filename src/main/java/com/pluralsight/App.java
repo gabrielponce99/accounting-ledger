@@ -17,8 +17,7 @@ public class App {
     }
 
     // File Reader
-    public static ArrayList<Transaction> loadTransactions() {
-        ArrayList<Transaction> transactions = new ArrayList<>();
+    public static void loadTransactions() {
 
         try {
             FileReader fileReader = new FileReader("transactions.csv");
@@ -37,14 +36,11 @@ public class App {
                 double amount = Double.parseDouble(fields[4]);
                 Transaction transaction = new Transaction(date, time, description, vendor, amount);
                 transactions.add(transaction);
-
             }
             bufferedReader.close();
         } catch (IOException e) {
             System.out.println("There was an error reading the transactions. Check the location of the file.");
         }
-        return transactions;
-
     }
 
     // toString to print File
@@ -93,9 +89,9 @@ public class App {
             command = scanner.nextLine().trim().toUpperCase();
 
             switch (command) {
-                case "A" -> printTransactions(loadTransactions());
-                case "D" -> displayDeposits(loadTransactions());
-                case "P" -> displayPayments(loadTransactions());
+                case "A" -> printTransactions(transactions);
+                case "D" -> displayDeposits(transactions);
+                case "P" -> displayPayments(transactions);
                 case "R" -> runReportsScreen();
                 case "H" -> System.out.println("Back to Home");
                 default -> System.out.println("That isn't a command. Try again.");
@@ -119,11 +115,11 @@ public class App {
             command = scanner.nextLine().trim().toUpperCase();
 
             switch (command) {
-                case "1" -> displayMonthToDate(loadTransactions());
-                case "2" -> displayPreviousMonth(loadTransactions());
-                case "3" -> displayYearToDate(loadTransactions());
-                case "4" -> displayPreviousYear(loadTransactions());
-                case "5" -> searchVendor(loadTransactions());
+                case "1" -> displayMonthToDate(transactions);
+                case "2" -> displayPreviousMonth(transactions);
+                case "3" -> displayYearToDate(transactions);
+                case "4" -> displayPreviousYear(transactions);
+                case "5" -> searchByVendor(transactions);
                 case "0" -> System.out.println("Back to Ledger");
                 default -> System.out.println("That isn't a command. Try again.");
             }
@@ -150,6 +146,7 @@ public class App {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
             writer.write(line);
             writer.newLine();
+            transactions.add(new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount));
             System.out.println("Deposit saved.");
         } catch (IOException e) {
             System.out.println("Error writing to file");
@@ -179,6 +176,7 @@ public class App {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
             writer.write(line);
             writer.newLine();
+            transactions.add(new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount));
             System.out.println("Purchased saved.");
         } catch (IOException e) {
             System.out.println("Error writing to file.");
@@ -259,7 +257,7 @@ public class App {
     }
 
     // Action to search Vendor
-    public static void searchVendor(ArrayList<Transaction> transactions) {
+    public static void searchByVendor(ArrayList<Transaction> transactions) {
         boolean found = false;
 
         while (!found) {
