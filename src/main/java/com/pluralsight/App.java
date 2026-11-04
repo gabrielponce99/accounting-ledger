@@ -44,7 +44,7 @@ public class App {
     }
 
     // toString to print File
-    public static void printTransactions(ArrayList<Transaction> transactions) {
+    public static void displayAll(ArrayList<Transaction> transactions) {
         for (Transaction transaction : transactions) {
             System.out.println(transaction);
         }
@@ -89,7 +89,7 @@ public class App {
             command = scanner.nextLine().trim().toUpperCase();
 
             switch (command) {
-                case "A" -> printTransactions(transactions);
+                case "A" -> displayAll(transactions);
                 case "D" -> displayDeposits(transactions);
                 case "P" -> displayPayments(transactions);
                 case "R" -> runReportsScreen();
@@ -177,7 +177,7 @@ public class App {
             writer.write(line);
             writer.newLine();
             transactions.add(new Transaction(LocalDate.now(), LocalTime.now(), description, vendor, amount));
-            System.out.println("Purchased saved.");
+            System.out.println("Payment saved.");
         } catch (IOException e) {
             System.out.println("Error writing to file.");
         }
@@ -206,11 +206,11 @@ public class App {
 
     // Action to display Month to Date
     public static void displayMonthToDate(ArrayList<Transaction> transactions) {
-        LocalDate today = LocalDate.now();
+        LocalDate date = LocalDate.now();
 
         for (Transaction transaction : transactions) {
             LocalDate time = transaction.getDate();
-            if (time.getMonth() == today.getMonth() && time.getYear() == today.getYear()) {
+            if (time.getMonth() == date.getMonth() && time.getYear() == date.getYear()) {
                 System.out.println(transaction);
             }
         }
@@ -232,11 +232,11 @@ public class App {
 
     // Action to display Year to Date
     public static void displayYearToDate(ArrayList<Transaction> transactions) {
-        LocalDate year = LocalDate.now();
+        LocalDate today = LocalDate.now();
 
         for (Transaction transaction : transactions) {
             LocalDate time = transaction.getDate();
-            if (year.getYear() == time.getYear()) {
+            if (today.getYear() == time.getYear()) {
                 System.out.println(transaction);
             }
         }
@@ -276,7 +276,7 @@ public class App {
     // Input helper (double)
     private static double promptForDouble(String prompt) {
         while (true) {
-            System.out.println(prompt);
+            System.out.print(prompt);
             try {
                 return Double.parseDouble(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
@@ -288,7 +288,7 @@ public class App {
     // Input helpers (String)
     private static String promptForString(String prompt) {
         while (true) {
-            System.out.println(prompt);
+            System.out.print(prompt);
             String input = scanner.nextLine().trim();
             if (input.isEmpty()) {
                 System.out.println("This can't be blank.");
