@@ -166,7 +166,7 @@ public class App {
         String time = LocalTime.now().format(timeFormatter);
 
         String line = date + "|" + time + "|" + transaction.getDescription() + "|" + transaction.getVendor()
-                + "|" + transaction.getAmount() + "\n";
+                + "|" + String.format("%.2f", transaction.getAmount()) + "\n";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
             writer.write(line);
@@ -201,12 +201,19 @@ public class App {
     // Action to display Month to Date
     public static void displayMonthToDate(ArrayList<Transaction> transactions) {
         LocalDate date = LocalDate.now();
+        boolean found = false;
+
+        System.out.println("=== Month To Date ===");
 
         for (Transaction transaction : transactions) {
             LocalDate time = transaction.getDate();
             if (time.getMonth() == date.getMonth() && time.getYear() == date.getYear()) {
                 System.out.println(transaction);
+                found = true;
             }
+        }
+        if (!found) {
+            System.out.println("No transactions found.");
         }
         pressEnterToContinue();
     }
@@ -214,12 +221,19 @@ public class App {
     // Action to display Previous Month
     public static void displayPreviousMonth(ArrayList<Transaction> transactions) {
         LocalDate lastMonth = LocalDate.now().minusMonths(1);
+        boolean found = false;
+
+        System.out.println("=== Previous Year ===");
 
         for (Transaction transaction : transactions) {
             LocalDate time = transaction.getDate();
             if (time.getMonth() == lastMonth.getMonth() && time.getYear() == lastMonth.getYear()) {
                 System.out.println(transaction);
+                found = true;
             }
+        }
+        if (!found) {
+            System.out.println("No transactions found.");
         }
         pressEnterToContinue();
     }
@@ -227,12 +241,19 @@ public class App {
     // Action to display Year to Date
     public static void displayYearToDate(ArrayList<Transaction> transactions) {
         LocalDate today = LocalDate.now();
+        boolean found = false;
+
+        System.out.println("=== Year To Date ===");
 
         for (Transaction transaction : transactions) {
             LocalDate time = transaction.getDate();
             if (today.getYear() == time.getYear()) {
                 System.out.println(transaction);
+                found = true;
             }
+        }
+        if (!found) {
+            System.out.println("No transactions found.");
         }
         pressEnterToContinue();
     }
@@ -240,12 +261,19 @@ public class App {
     // Action to display Previous Year
     public static void displayPreviousYear(ArrayList<Transaction> transactions) {
         LocalDate lastYear = LocalDate.now().minusYears(1);
+        boolean found = false;
+
+        System.out.println("=== Previous Year ===");
 
         for (Transaction transaction : transactions) {
             LocalDate time = transaction.getDate();
             if (time.getYear() == lastYear.getYear()) {
                 System.out.println(transaction);
+                found = true;
             }
+        }
+        if (!found) {
+            System.out.println("No transactions found.");
         }
         pressEnterToContinue();
     }
