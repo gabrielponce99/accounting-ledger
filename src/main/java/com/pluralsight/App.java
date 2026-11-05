@@ -291,7 +291,7 @@ public class App {
         String vendor = promptForString("Enter the desired vendor: ");
 
         for (Transaction transaction : transactions) {
-            if (transaction != null && transaction.getVendor().equalsIgnoreCase(vendor)) {
+            if (transaction.getVendor().equalsIgnoreCase(vendor)) {
                 System.out.println(transaction);
                 found = true;
             }
@@ -314,7 +314,7 @@ public class App {
         }
     }
 
-    // Input helpers (String)
+    // Input helper (String)
     private static String promptForString(String prompt) {
         while (true) {
             System.out.print(prompt);
