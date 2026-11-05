@@ -233,7 +233,7 @@ public class App {
         LocalDate lastMonth = LocalDate.now().minusMonths(1);
         boolean found = false;
 
-        System.out.println("=== Previous Year ===");
+        System.out.println("=== Previous Month ===");
 
         for (Transaction transaction : transactions) {
             LocalDate time = transaction.getDate();
