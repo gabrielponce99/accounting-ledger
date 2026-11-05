@@ -302,7 +302,6 @@ public class App {
         pressEnterToContinue();
     }
 
-    // Input helper (double)
     private static double promptForDouble(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -314,7 +313,6 @@ public class App {
         }
     }
 
-    // Input helper (String)
     private static String promptForString(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -329,7 +327,6 @@ public class App {
         }
     }
 
-    // Press Enter to Continue Action
     public static void pressEnterToContinue() {
         System.out.println();
         System.out.println("Press enter to continue back to the menu...");
