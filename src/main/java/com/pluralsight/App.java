@@ -16,7 +16,7 @@ public class App {
         runHomeScreen();
     }
 
-    // File Reader
+
     public static void loadTransactions() {
 
         try {
@@ -43,8 +43,8 @@ public class App {
         }
     }
 
-    // toString to print File
-    public static void displayAll(ArrayList<Transaction> transactions) {
+
+    public static void displayAll() {
         System.out.println("=== All Transactions ===");
 
         for (Transaction transaction : transactions) {
@@ -53,7 +53,7 @@ public class App {
         pressEnterToContinue();
     }
 
-    // Main Home Screen
+
     public static void runHomeScreen() {
         String command;
         do {
@@ -76,7 +76,7 @@ public class App {
         } while (!command.equals("X"));
     }
 
-    // Ledger Screen
+
     public static void runLedgerScreen() {
         String command;
         do {
@@ -91,9 +91,9 @@ public class App {
             command = scanner.nextLine().trim().toUpperCase();
 
             switch (command) {
-                case "A" -> displayAll(transactions);
-                case "D" -> displayDeposits(transactions);
-                case "P" -> displayPayments(transactions);
+                case "A" -> displayAll();
+                case "D" -> displayDeposits();
+                case "P" -> displayPayments();
                 case "R" -> runReportsScreen();
                 case "H" -> System.out.println("Back to Home");
                 default -> System.out.println("That isn't a command. Try again.");
@@ -101,7 +101,7 @@ public class App {
         } while (!command.equals("H"));
     }
 
-    // Reports Screen
+
     public static void runReportsScreen() {
         String command;
         do {
@@ -117,18 +117,18 @@ public class App {
             command = scanner.nextLine().trim().toUpperCase();
 
             switch (command) {
-                case "1" -> displayMonthToDate(transactions);
-                case "2" -> displayPreviousMonth(transactions);
-                case "3" -> displayYearToDate(transactions);
-                case "4" -> displayPreviousYear(transactions);
-                case "5" -> searchByVendor(transactions);
+                case "1" -> displayMonthToDate();
+                case "2" -> displayPreviousMonth();
+                case "3" -> displayYearToDate();
+                case "4" -> displayPreviousYear();
+                case "5" -> searchByVendor();
                 case "0" -> System.out.println("Back to Ledger");
                 default -> System.out.println("That is not a command, try again.");
             }
         } while (!command.equals("0"));
     }
 
-    // Action Deposit
+
     public static void addDeposit() {
         String description = promptForString("Description: ");
         String vendor = promptForString("Vendor: ");
@@ -145,7 +145,7 @@ public class App {
         pressEnterToContinue();
     }
 
-    // Make Payment Action
+
     public static void makePayment() {
         String description = promptForString("Description: ");
         String vendor = promptForString("Vendor: ");
@@ -161,6 +161,7 @@ public class App {
         System.out.println("Payment saved.");
         pressEnterToContinue();
     }
+
 
     public static void saveTransaction(Transaction transaction) {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -180,8 +181,8 @@ public class App {
 
     }
 
-    // Display only the deposits
-    public static void displayDeposits(ArrayList<Transaction> transactions) {
+
+    public static void displayDeposits() {
         System.out.println("=== Deposits ===");
 
         for (Transaction transaction : transactions) {
@@ -192,8 +193,7 @@ public class App {
         pressEnterToContinue();
     }
 
-    // Display only the payments
-    public static void displayPayments(ArrayList<Transaction> transactions) {
+    public static void displayPayments() {
         System.out.println("=== Payments ===");
 
         for (Transaction transaction : transactions) {
@@ -204,8 +204,8 @@ public class App {
         pressEnterToContinue();
     }
 
-    // Action to display Month to Date
-    public static void displayMonthToDate(ArrayList<Transaction> transactions) {
+
+    public static void displayMonthToDate() {
         LocalDate today = LocalDate.now();
         boolean found = false;
 
@@ -224,8 +224,8 @@ public class App {
         pressEnterToContinue();
     }
 
-    // Action to display Previous Month
-    public static void displayPreviousMonth(ArrayList<Transaction> transactions) {
+
+    public static void displayPreviousMonth() {
         LocalDate lastMonth = LocalDate.now().minusMonths(1);
         boolean found = false;
 
@@ -244,8 +244,8 @@ public class App {
         pressEnterToContinue();
     }
 
-    // Action to display Year to Date
-    public static void displayYearToDate(ArrayList<Transaction> transactions) {
+
+    public static void displayYearToDate() {
         LocalDate today = LocalDate.now();
         boolean found = false;
 
@@ -264,8 +264,8 @@ public class App {
         pressEnterToContinue();
     }
 
-    // Action to display Previous Year
-    public static void displayPreviousYear(ArrayList<Transaction> transactions) {
+
+    public static void displayPreviousYear() {
         LocalDate lastYear = LocalDate.now().minusYears(1);
         boolean found = false;
 
@@ -284,8 +284,8 @@ public class App {
         pressEnterToContinue();
     }
 
-    // Action to search Vendor
-    public static void searchByVendor(ArrayList<Transaction> transactions) {
+
+    public static void searchByVendor() {
         boolean found = false;
         String vendor = promptForString("Enter the desired vendor: ");
 
@@ -328,7 +328,7 @@ public class App {
         }
     }
 
-    // Press Enter to Continue
+    // Press Enter to Continue Action
     public static void pressEnterToContinue() {
         System.out.println();
         System.out.println("Press enter to continue back to the menu...");
