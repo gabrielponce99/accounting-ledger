@@ -45,6 +45,8 @@ public class App {
 
     // toString to print File
     public static void displayAll(ArrayList<Transaction> transactions) {
+        System.out.println("=== All Transactions ===");
+
         for (Transaction transaction : transactions) {
             System.out.println(transaction);
         }
@@ -180,6 +182,8 @@ public class App {
 
     // Display only the deposits
     public static void displayDeposits(ArrayList<Transaction> transactions) {
+        System.out.println("=== Deposits ===");
+
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() > 0) {
                 System.out.println(transaction);
@@ -190,6 +194,8 @@ public class App {
 
     // Display only the payments
     public static void displayPayments(ArrayList<Transaction> transactions) {
+        System.out.println("=== Payments ===");
+
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() < 0) {
                 System.out.println(transaction);
