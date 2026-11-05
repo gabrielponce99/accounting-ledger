@@ -16,7 +16,6 @@ public class App {
         runHomeScreen();
     }
 
-
     public static void loadTransactions() {
 
         try {

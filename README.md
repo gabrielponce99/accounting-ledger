@@ -70,5 +70,50 @@ Type any of the numbers showed (`1, 2, 3, 4, 5, 0`) on the left side of the text
 6. To close the app, type `0` to go back to `Ledger` screen, then type `H` to go back to `Home` menu and lastly `X` 
 to `Exit` the app.
 
-## Screenshots
+## Roadmap
 
+![roadmap.png](screenshots/roadmap.png)
+
+## Screenshots
+![home-menu.png](screenshots/home-menu.png)
+
+![ledger-screen.png](screenshots/ledger-screen.png)
+
+![reports-screen.png](screenshots/reports-screen.png)
+
+![all-transactions.png](screenshots/all-transactions.png)
+
+![exit-home.png](screenshots/exit-home.png)
+
+## Interesting Code
+
+`displayPreviousMonth` is my interesting code. I discovered `minusMonths()` by browsing the
+autocomplete options after typing a dot. It subtracts any number of months from a date, and
+`minusYears()` works the same way for years, which I used later.
+
+```java
+public static void displayPreviousMonth() {
+        LocalDate lastMonth = LocalDate.now().minusMonths(1);
+        boolean found = false;
+
+        System.out.println("=== Previous Year ===");
+
+        for (Transaction transaction : transactions) {
+            LocalDate time = transaction.getDate();
+            if (time.getMonth() == lastMonth.getMonth() && time.getYear() == lastMonth.getYear()) {
+                System.out.println(transaction);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No transactions found.");
+        }
+        pressEnterToContinue();
+    }
+```
+
+## Author
+
+Gabriel Ponce, Year Up Java Academy
+
+https://www.linkedin.com/in/gabriel-m-ponce/
