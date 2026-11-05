@@ -42,7 +42,6 @@ public class App {
         }
     }
 
-
     public static void displayAll() {
         System.out.println("=== All Transactions ===");
 
@@ -51,7 +50,6 @@ public class App {
         }
         pressEnterToContinue();
     }
-
 
     public static void runHomeScreen() {
         String command;
@@ -74,7 +72,6 @@ public class App {
             }
         } while (!command.equals("X"));
     }
-
 
     public static void runLedgerScreen() {
         String command;
@@ -99,7 +96,6 @@ public class App {
             }
         } while (!command.equals("H"));
     }
-
 
     public static void runReportsScreen() {
         String command;
@@ -127,7 +123,6 @@ public class App {
         } while (!command.equals("0"));
     }
 
-
     public static void addDeposit() {
         String description = promptForString("Description: ");
         String vendor = promptForString("Vendor: ");
@@ -143,7 +138,6 @@ public class App {
         System.out.println("Deposit saved.");
         pressEnterToContinue();
     }
-
 
     public static void makePayment() {
         String description = promptForString("Description: ");
@@ -161,14 +155,12 @@ public class App {
         pressEnterToContinue();
     }
 
-
     public static void saveTransaction(Transaction transaction) {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String date = transaction.getDate().toString();
         String time = transaction.getTime().format(timeFormatter);
 
-        String line = date + "|" + time + "|" + transaction.getDescription() + "|" + transaction.getVendor()
-                + "|" + String.format("%.2f", transaction.getAmount()) + "\n";
+        String line = date + "|" + time + "|" + transaction.getDescription() + "|" + transaction.getVendor() + "|" + String.format("%.2f", transaction.getAmount()) + "\n";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true))) {
             writer.write(line);
@@ -179,7 +171,6 @@ public class App {
         }
 
     }
-
 
     public static void displayDeposits() {
         System.out.println("=== Deposits ===");
@@ -203,7 +194,6 @@ public class App {
         pressEnterToContinue();
     }
 
-
     public static void displayMonthToDate() {
         LocalDate today = LocalDate.now();
         boolean found = false;
@@ -222,7 +212,6 @@ public class App {
         }
         pressEnterToContinue();
     }
-
 
     public static void displayPreviousMonth() {
         LocalDate lastMonth = LocalDate.now().minusMonths(1);
@@ -243,7 +232,6 @@ public class App {
         pressEnterToContinue();
     }
 
-
     public static void displayYearToDate() {
         LocalDate today = LocalDate.now();
         boolean found = false;
@@ -263,7 +251,6 @@ public class App {
         pressEnterToContinue();
     }
 
-
     public static void displayPreviousYear() {
         LocalDate lastYear = LocalDate.now().minusYears(1);
         boolean found = false;
@@ -282,7 +269,6 @@ public class App {
         }
         pressEnterToContinue();
     }
-
 
     public static void searchByVendor() {
         boolean found = false;
