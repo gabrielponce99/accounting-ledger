@@ -164,8 +164,8 @@ public class App {
 
     public static void saveTransaction(Transaction transaction) {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String date = LocalDate.now().toString();
-        String time = LocalTime.now().format(timeFormatter);
+        String date = transaction.getDate().toString();
+        String time = transaction.getTime().format(timeFormatter);
 
         String line = date + "|" + time + "|" + transaction.getDescription() + "|" + transaction.getVendor()
                 + "|" + String.format("%.2f", transaction.getAmount()) + "\n";
@@ -206,14 +206,14 @@ public class App {
 
     // Action to display Month to Date
     public static void displayMonthToDate(ArrayList<Transaction> transactions) {
-        LocalDate date = LocalDate.now();
+        LocalDate today = LocalDate.now();
         boolean found = false;
 
         System.out.println("=== Month To Date ===");
 
         for (Transaction transaction : transactions) {
             LocalDate time = transaction.getDate();
-            if (time.getMonth() == date.getMonth() && time.getYear() == date.getYear()) {
+            if (time.getMonth() == today.getMonth() && time.getYear() == today.getYear()) {
                 System.out.println(transaction);
                 found = true;
             }
