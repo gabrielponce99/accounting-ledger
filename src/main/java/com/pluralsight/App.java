@@ -60,9 +60,14 @@ public class App {
 
     public static void displayAll() {
         System.out.println("=== All Transactions ===");
+        boolean found = false;
 
         for (Transaction transaction : transactions) {
             System.out.println(transaction);
+            found = true;
+        }
+        if (!found) {
+                System.out.println("No transactions found.");
         }
         pressEnterToContinue();
     }
@@ -190,22 +195,32 @@ public class App {
 
     public static void displayDeposits() {
         System.out.println("=== Deposits ===");
+        boolean found = false;
 
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() > 0) {
                 System.out.println(transaction);
+                found = true;
             }
+        }
+        if (!found) {
+            System.out.println("No transactions found.");
         }
         pressEnterToContinue();
     }
 
     public static void displayPayments() {
         System.out.println("=== Payments ===");
+        boolean found = false;
 
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() < 0) {
                 System.out.println(transaction);
+                found = true;
             }
+        }
+        if (!found) {
+            System.out.println("No transactions found.");
         }
         pressEnterToContinue();
     }
