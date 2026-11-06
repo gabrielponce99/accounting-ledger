@@ -232,8 +232,8 @@ public class App {
         System.out.println("=== Month To Date ===");
 
         for (Transaction transaction : transactions) {
-            LocalDate time = transaction.getDate();
-            if (time.getMonth() == today.getMonth() && time.getYear() == today.getYear()) {
+            LocalDate transactionDate = transaction.getDate();
+            if (transactionDate.getMonth() == today.getMonth() && transactionDate.getYear() == today.getYear()) {
                 System.out.println(transaction);
                 found = true;
             }
@@ -251,8 +251,8 @@ public class App {
         System.out.println("=== Previous Month ===");
 
         for (Transaction transaction : transactions) {
-            LocalDate time = transaction.getDate();
-            if (time.getMonth() == lastMonth.getMonth() && time.getYear() == lastMonth.getYear()) {
+            LocalDate transactionDate = transaction.getDate();
+            if (transactionDate.getMonth() == lastMonth.getMonth() && transactionDate.getYear() == lastMonth.getYear()) {
                 System.out.println(transaction);
                 found = true;
             }
@@ -270,8 +270,8 @@ public class App {
         System.out.println("=== Year To Date ===");
 
         for (Transaction transaction : transactions) {
-            LocalDate time = transaction.getDate();
-            if (today.getYear() == time.getYear()) {
+            LocalDate transactionDate = transaction.getDate();
+            if (today.getYear() == transactionDate.getYear()) {
                 System.out.println(transaction);
                 found = true;
             }
@@ -289,8 +289,8 @@ public class App {
         System.out.println("=== Previous Year ===");
 
         for (Transaction transaction : transactions) {
-            LocalDate time = transaction.getDate();
-            if (time.getYear() == lastYear.getYear()) {
+            LocalDate transactionDate = transaction.getDate();
+            if (transactionDate.getYear() == lastYear.getYear()) {
                 System.out.println(transaction);
                 found = true;
             }
